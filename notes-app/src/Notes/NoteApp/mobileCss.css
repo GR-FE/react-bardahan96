@@ -1,3 +1,36 @@
+
+.prevBtn{
+    background-color: #fff;
+}
+
+.underLine{
+    height: 1px;
+    background: rgb(178, 174, 174);
+    width: 100vw;
+}
+
+.noteHeader{
+    display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        justify-content: space-around;
+        width: 90%;
+}
+
+@media( max-width:431px) {
+
+    .noteHeadLine{
+        font-size: 26px;
+    }
+
 #root{
     height: 100vh;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+body{
+    width: 98vw;
+    height: 100vh;
+}
 }
