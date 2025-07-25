@@ -1,9 +1,8 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 import { BrowserRouter } from 'react-router'
-import NotesApp from './NotesApp'
+import NotesApp from './Notes/NoteApp/NotesApp'
 
 function App() {
   const [count, setCount] = useState(0)

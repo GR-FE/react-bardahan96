@@ -6,16 +6,13 @@
 // - Build the Note app responsive UI, try and break down the UI to small components as much as you can.
 // - Build the routing, make sure to notice the difference between the mobile version and the desktop version.
 import { useEffect, useState } from "react";
-import SideBar from "./SideBar";
-import Note from "./Note";
-import './NotesApp.css'
-import './Note.css'
-import NoteTitle from "./NoteTitle";
-import './NoteTitle.css'
 
+import Note from "../NoteMain/Note";
+import './NotesApp.css'
+import NoteTitle from "../NoteTitle/NoteTitle";
 import { BrowserRouter, NavLink, Route, Routes, useLocation } from "react-router";
 import AddBtn from "./addBtn";
-import NoteContent from "./NoteContent";
+import NoteContent from "../NoteContent/NoteContent";
 
 
 export default function NotesApp() {

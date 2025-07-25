@@ -1,7 +1,7 @@
 import { useEffect, useState, useLocalStorage } from "react";
 import { BrowserRouter, NavLink } from "react-router";
 import { useNavigate } from "react-router";
-
+import './NoteTitle.css'
 export default function NoteTitle({sharedStorage, noteName}) {
     const navigate = useNavigate()
     

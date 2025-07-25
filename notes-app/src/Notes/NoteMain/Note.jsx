@@ -21,7 +21,8 @@ export default function Note({updateNote}) {
     }
 
 
-    const updateForm = () => {     
+    const updateForm = () => { 
+        if (noteData.title == 0) return     
         setIsSaved(true)
         updateNote(noteData)
         clearInput()
