@@ -1,0 +1,13 @@
+.noteTitle{
+    color: gray;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-transform: capitalize;
+    margin: 0.8rem 0rem
+}
+
+.noteTitles{
+    display: flex;
+    flex-direction: column;
+}
