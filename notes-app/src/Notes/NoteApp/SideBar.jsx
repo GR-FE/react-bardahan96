@@ -3,6 +3,8 @@ import NoteTitle from "../NoteTitle/NoteTitle"
 
 export default function SideBar({noteName, sharedStorage , isMobile}) {
 
+    console.log(noteName);
+
     return (
         <div className="sideBar">
         {!isMobile && <h1>My Notes App</h1>}

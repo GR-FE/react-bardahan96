@@ -10,7 +10,7 @@ export default function NoteContent({sharedStorage, clickedName}) {
 
 
 
-   
+   console.log("select", select);
 
     useEffect(() => {
         const shared1 = sharedStorage
@@ -19,7 +19,10 @@ export default function NoteContent({sharedStorage, clickedName}) {
         
     }, [])
 
- const select = [...sharedStorage].find((note) => note.title == clickedName)
+ 
+        const select = [...sharedStorage].find((note) => note.title == clickedName)
+
+ 
 
         useEffect(() => {
             console.log(select);

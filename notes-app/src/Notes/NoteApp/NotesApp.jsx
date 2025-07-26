@@ -27,8 +27,6 @@ const [updateForm, setUpdateForm] = useState(() => {
 const [clickedName, setClickedName] = useState()
 const [isMobile, setIsMobile] = useState(false)
 
-
-
 function defineTypeOfView () {
     const width = window.innerWidth
     if(width < 431) {
@@ -36,36 +34,30 @@ function defineTypeOfView () {
     }
 }
 
-
-
 useEffect(() => {
     defineTypeOfView()
 }, [])
-
 
 function handleClickedName (e) {
     const value = e.target.textContent
     setClickedName(value)
 }
-
-console.log("this is the clicked name" , clickedName);
     
     const updateNoteForm = (recieveData) => {
         setUpdateForm(prev => [...prev , recieveData])
     }
-    
 
-
-
+    console.log("this is the clicked name" , clickedName);
     
     useEffect(() => {
         if(updateForm.length > 0) {
             localStorage.setItem("Note" , JSON.stringify(updateForm))
-        }
-        console.log(updateForm);
-        
+        }     
     }, [updateForm])
 
+    console.log(clickedName);
+
+  
 
     if (!isMobile) {
         return (

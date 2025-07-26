@@ -4,21 +4,21 @@ import { useNavigate } from 'react-router';
 import { forwardRef , useImperativeHandle } from 'react';
 import { useLocation } from 'react-router';
 
+
 export default function Note({updateNote}) {
 
     const [isSaved, setIsSaved] = useState(false)
     const [noteData, setNoteData] = useState([])
+    const [priority, setPriority] = useState(null)
 
-
-
-
-    
     const handleForm = (e) => {
         setNoteData({
             ...noteData, [e.target.name]: e.target.value
         }) 
-    }
+        
 
+        
+    }
 
     const updateForm = () => { 
         if (noteData.title == 0) return     
@@ -26,8 +26,6 @@ export default function Note({updateNote}) {
         updateNote(noteData)
         clearInput()
     }
-
-
 
     useEffect(() => {
         setInterval(() => {
@@ -48,11 +46,26 @@ export default function Note({updateNote}) {
             <form action="submitNote"> 
                 <div className="formContainer">
                     <span className='saved'>{isSaved && "saved!"}</span>
-                    <label htmlFor="title">Title</label>
-                    <input id='title' type="text"  name="title" value={noteData.title}    placeholder="Your title here" onChange={handleForm}  />
 
-                    <label htmlFor="Note">Note</label>
-                    <input id='Note' type="text" name="Note" value={noteData.Note}   placeholder="Your content here" onBlur={updateForm}  onChange={handleForm}   />
+                    <div>
+                        <label htmlFor="title">Title</label>
+                        <input id='title' type="text"  name="title" value={noteData.title}    placeholder="Your title here" onChange={handleForm}  />
+                    </div>
+
+                    <div>
+                        <label htmlFor='priority'>Priority</label>
+                        <select value={noteData.priority} onChange={handleForm}   name="priority" id="priority">
+                            <option disabled={true} selected={true} value=""></option>
+                            <option   value="highPriority">Hige Priority</option>
+                            <option  value="mediumPriority">Medium Priority</option>
+                            <option  value="lowPriority">Low Priority</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label htmlFor="Note">Note</label>
+                        <input id='Note' type="text" name="Note" value={noteData.Note}   placeholder="Your content here" onBlur={updateForm}  onChange={handleForm}   />
+                    </div>    
                 </div>
                     
             </form>
