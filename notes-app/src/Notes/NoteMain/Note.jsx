@@ -13,7 +13,6 @@ export default function Note({updateNote}) {
 
 
     
-    
     const handleForm = (e) => {
         setNoteData({
             ...noteData, [e.target.name]: e.target.value

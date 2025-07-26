@@ -15,6 +15,7 @@ import AddBtn from "./addBtn";
 import NoteContent from "../NoteContent/NoteContent";
 import SideBar from "./SideBar";
 import './mobileCss.css'
+import TopBar from "./topBar";
 
 
 export default function NotesApp() {
@@ -88,21 +89,17 @@ console.log("this is the clicked name" , clickedName);
         return (
             <BrowserRouter>
 
-                <div className="noteHeader">
-                    <h1 className="noteHeadLine">My Note App</h1>
-                    <NavLink to="">
-                        <button className="prevBtn"><svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M13.5 7H1M1 7L7 1M1 7L7 13" stroke="#4E61F6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg></button>
-</NavLink>
-                
-                </div>
-                <div className="underLine"></div>
+            <TopBar/>
 
+ 
+                <div className="underLine"></div>
+                
                 <Routes>
+                    
                     <Route path="" element={ <SideBar isMobile={isMobile} noteName={handleClickedName} sharedStorage={updateForm}/>}/>
                     {/* <Route path="NoteTitle" element={<NoteTitle/>}/> */}
                     <Route path="Note" element={<Note updateNote={updateNoteForm}/>}/>
+                    <Route path="NoteContent" element={<NoteContent clickedName={clickedName} sharedStorage={updateForm}/>}/>
                    
                     
                 </Routes>

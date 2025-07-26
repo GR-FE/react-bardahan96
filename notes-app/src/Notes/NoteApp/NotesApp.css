@@ -35,7 +35,7 @@ body{
 
         .addNote{
             align-self: end;
-            button{
+            .AddNoteBtn{
                 background-color:#4E61F6;
                 color: #fff;
                 border-radius: 0.8rem;
