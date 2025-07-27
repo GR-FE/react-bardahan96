@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { NavLink, useLocation } from "react-router"
 
 
-export default function TopBar() {
+export default function TopBar({sharedStorage, clickedName}) {
 
     const location = useLocation()
 
@@ -14,14 +14,25 @@ export default function TopBar() {
          </svg></button>
          </NavLink>
 
+         const noteTitle  = [...sharedStorage].find((note) => note == clickedName)
+
+         console.log(noteTitle);
+
+
+
+         
+
+const titleLocation = location.pathname
+
     return (
         <div className="noteHeader">
 
-            
-            
-            <h1>My Note App</h1>
+
+            {location.pathname == "" || "/Note" && <h1>My Notes App</h1>}
+            {location.pathname == noteTitle.title && <h2>{noteTitle.title}</h2>}
             {showArrow}
-            
+
+
         </div>
     )
     

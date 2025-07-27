@@ -42,7 +42,6 @@ body{
                 font-size: 14px;
             }
         }
-
     }
 
     .mainNote {
@@ -58,42 +57,8 @@ body{
         box-sizing: border-box;
         padding: 1rem;
         border-radius: 30px;
-
-    }
-
-
-}
-
-
-
-@media (max-width: 431px) {
-
-    .noteForm {
-        width: 100vw;
-        display: flex;
-        justify-content: flex-start;
-        height: 90vh;
-    }
-
-    form{
-        width: 90%;
-    }
-
-    .sideNote{
-        width: 100%;
-    }
-
-    input:nth-of-type(2) {
-        height: 70vh;
-    }
-
-    .noteHeader{
-        margin-bottom: 1rem;
-
-    }
-    .sideBar{
-        padding: 0rem 2rem;
     }
 }
+
 
 

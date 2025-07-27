@@ -3,7 +3,7 @@ import NoteTitle from "../NoteTitle/NoteTitle"
 
 export default function SideBar({noteName, sharedStorage , isMobile}) {
 
-    console.log(noteName);
+
 
     return (
         <div className="sideBar">

@@ -9,30 +9,40 @@
         gap: 1.5rem;
         padding: 1.5rem;
         box-sizing: border-box;
-    
 
-    input{
-        width: 95%;
+    .inputBox{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        width: 100%;
+    }
+    .inputTitle , .inputNote, .inputPriority{
+        width: 98%;
         background: #f1f1f1;
         border: 1px solid #ece7e7;
         padding: 0.4rem;
         border-radius: 0.3rem;
         box-sizing: border-box;
+    
     }
     
-    input:nth-of-type(2){
+    .inputNote{
         height: 40vh;
-        
 
         &::placeholder{
-            vertical-align: top;
+            transform: translateY(-17vh);
+            
         }
+    }
+
+    .inputPriority{    
+        color: #9f9999;
     }
 }
 
 .saved{
     color: gray;
-    width: 95%;
+    width: 98%;
     display: flex;
     align-items: center;
     justify-content: flex-end;

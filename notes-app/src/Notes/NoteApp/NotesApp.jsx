@@ -39,15 +39,17 @@ useEffect(() => {
 }, [])
 
 function handleClickedName (e) {
-    const value = e.target.textContent
+    const value = e.target.value
     setClickedName(value)
 }
-    
+
+
+console.log(clickedName);
     const updateNoteForm = (recieveData) => {
         setUpdateForm(prev => [...prev , recieveData])
     }
 
-    console.log("this is the clicked name" , clickedName);
+console.log(updateForm);
     
     useEffect(() => {
         if(updateForm.length > 0) {
@@ -55,7 +57,6 @@ function handleClickedName (e) {
         }     
     }, [updateForm])
 
-    console.log(clickedName);
 
   
 
@@ -81,7 +82,7 @@ function handleClickedName (e) {
         return (
             <BrowserRouter>
 
-            <TopBar/>
+            <TopBar clickedName={clickedName} sharedStorage={updateForm}/>
 
  
                 <div className="underLine"></div>

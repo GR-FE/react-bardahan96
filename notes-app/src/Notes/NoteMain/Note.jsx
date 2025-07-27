@@ -12,10 +12,10 @@ export default function Note({updateNote}) {
     const [priority, setPriority] = useState(null)
 
     const handleForm = (e) => {
+        const id = crypto.randomUUID()
         setNoteData({
-            ...noteData, [e.target.name]: e.target.value
+            ...noteData, [e.target.name]: e.target.value , id
         }) 
-        
 
         
     }
@@ -36,7 +36,8 @@ export default function Note({updateNote}) {
         const clearInput = () => {
         setNoteData({
         title: "" , 
-        Note: ""
+        Note: "" , 
+        priority: ""
         })
     }
 
@@ -47,14 +48,14 @@ export default function Note({updateNote}) {
                 <div className="formContainer">
                     <span className='saved'>{isSaved && "saved!"}</span>
 
-                    <div>
+                    <div className='inputBox'>
                         <label htmlFor="title">Title</label>
-                        <input id='title' type="text"  name="title" value={noteData.title}    placeholder="Your title here" onChange={handleForm}  />
+                        <input className='inputTitle' id='title' type="text"  name="title" value={noteData.title}    placeholder="Your title here" onChange={handleForm}  />
                     </div>
 
-                    <div>
+                    <div className='inputBox'>
                         <label htmlFor='priority'>Priority</label>
-                        <select value={noteData.priority} onChange={handleForm}   name="priority" id="priority">
+                        <select className='inputPriority' value={noteData.priority} onChange={handleForm}   name="priority" id="priority">
                             <option disabled={true} selected={true} value=""></option>
                             <option   value="highPriority">Hige Priority</option>
                             <option  value="mediumPriority">Medium Priority</option>
@@ -62,9 +63,9 @@ export default function Note({updateNote}) {
                         </select>
                     </div>
 
-                    <div>
+                    <div className='inputBox'>
                         <label htmlFor="Note">Note</label>
-                        <input id='Note' type="text" name="Note" value={noteData.Note}   placeholder="Your content here" onBlur={updateForm}  onChange={handleForm}   />
+                        <input className='inputNote' id='Note' type="text" name="Note" value={noteData.Note}   placeholder="Your content here" onBlur={updateForm}  onChange={handleForm}   />
                     </div>    
                 </div>
                     
