@@ -39,7 +39,7 @@ useEffect(() => {
 }, [])
 
 function handleClickedName (e) {
-    const value = e.target.value
+    const value = e.target.textContent
     setClickedName(value)
 }
 

@@ -1,28 +1,30 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
+import { useParams } from "react-router";
 
 
 
 
+export default function NoteContent({sharedStorage, clickedId}) {
 
-export default function NoteContent({sharedStorage, clickedName}) {
-  
+    console.log(clickedId);
+        const select = [...sharedStorage].find((note) => note.id == clickedId)
 
- 
-        const select = [...sharedStorage].find((note) => note.title == clickedName)
-
-       
+       console.log(select);
 
         useEffect(() => {
             console.log(select);
         },[])
 
+        console.log(select);
+
 
     return (
         <div>
-            {[select].map((note, index) => {
-                return <div key={index}>
+            {[select].map((note) => {
+                return <div key={note.id}>
                     <h2>{note.title}</h2>
+                    
                     <p>{note.Note}</p>
                 </div>
             })}
