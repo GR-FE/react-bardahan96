@@ -10,12 +10,13 @@ import { useEffect, useState } from "react";
 import Note from "../NoteMain/Note";
 import './NotesApp.css'
 import NoteTitle from "../NoteTitle/NoteTitle";
-import { BrowserRouter, NavLink, Route, Routes, useLocation } from "react-router";
+import { BrowserRouter, NavLink, Route, Routes, useLocation, useNavigate } from "react-router";
 import AddBtn from "./addBtn";
 import NoteContent from "../NoteContent/NoteContent";
 import SideBar from "./SideBar";
 import './mobileCss.css'
 import TopBar from "./topBar";
+import { Navigate } from "react-router";
 
 
 export default function NotesApp() {
@@ -24,7 +25,7 @@ const [updateForm, setUpdateForm] = useState(() => {
     const savedNotes = localStorage.getItem("Note");
     return savedNotes ? JSON.parse(savedNotes) : ""
 })
-const [clickedName, setClickedName] = useState()
+const [clickedId, setClickedId] = useState()
 const [isMobile, setIsMobile] = useState(false)
 
 function defineTypeOfView () {
@@ -34,17 +35,23 @@ function defineTypeOfView () {
     }
 }
 
+
 useEffect(() => {
     defineTypeOfView()
 }, [])
 
-function handleClickedName (e) {
-    const value = e.target.textContent
-    setClickedName(value)
+function handleClickedId (e) {
+    console.log("this id is :" , e.currentTarget.id);
+    const id = e.currentTarget.id
+    
+    setClickedId(id)
 }
 
+console.log(clickedId);
 
-console.log(clickedName);
+
+
+
     const updateNoteForm = (recieveData) => {
         setUpdateForm(prev => [...prev , recieveData])
     }
@@ -64,12 +71,12 @@ console.log(updateForm);
         return (
             <div className="notesContainer">
                 <BrowserRouter>
-                    <SideBar noteName={handleClickedName} sharedStorage={updateForm}/>
+                    <SideBar noteId={handleClickedId} sharedStorage={updateForm}/>
 
                     <div className="mainNote">
                         <Routes>
                             <Route path="Note" element={<Note updateNote={updateNoteForm}/>}/>
-                            <Route path="NoteContent" element={<NoteContent clickedName={clickedName} sharedStorage={updateForm}/>}/>
+                            <Route path={`/NoteContent/${clickedId}`} element={<NoteContent clickedId={clickedId} sharedStorage={updateForm}/>}/>
                         </Routes>
                     </div>
                 </BrowserRouter>
@@ -82,17 +89,18 @@ console.log(updateForm);
         return (
             <BrowserRouter>
 
-            <TopBar clickedName={clickedName} sharedStorage={updateForm}/>
+            <TopBar clickedId={clickedId} sharedStorage={updateForm}/>
 
  
                 <div className="underLine"></div>
                 
                 <Routes>
                     
-                    <Route path="" element={ <SideBar isMobile={isMobile} noteName={handleClickedName} sharedStorage={updateForm}/>}/>
-                    {/* <Route path="NoteTitle" element={<NoteTitle/>}/> */}
-                    <Route path="Note" element={<Note updateNote={updateNoteForm}/>}/>
-                    <Route path="NoteContent" element={<NoteContent clickedName={clickedName} sharedStorage={updateForm}/>}/>
+                    <Route path="" element={ <SideBar isMobile={isMobile} noteId={handleClickedId} sharedStorage={updateForm}/>}/>
+                    
+                    <Route path="Note" element={<Note isMobile={isMobile} updateNote={updateNoteForm}/>}/>
+                    <Route path={`/NoteContent/${clickedId}`} element={<NoteContent clickedId={clickedId} sharedStorage={updateForm}/>}/>
+                    
                    
                     
                 </Routes>

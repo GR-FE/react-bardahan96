@@ -5,7 +5,7 @@ import { forwardRef , useImperativeHandle } from 'react';
 import { useLocation } from 'react-router';
 
 
-export default function Note({updateNote}) {
+export default function Note({updateNote, isMobile}) {
 
     const [isSaved, setIsSaved] = useState(false)
     const [noteData, setNoteData] = useState([])
@@ -65,8 +65,10 @@ export default function Note({updateNote}) {
 
                     <div className='inputBox'>
                         <label htmlFor="Note">Note</label>
-                        <input className='inputNote' id='Note' type="text" name="Note" value={noteData.Note}   placeholder="Your content here" onBlur={updateForm}  onChange={handleForm}   />
+                        <input className='inputNote' id='Note' type="text" name="Note" value={noteData.Note}   placeholder="Your content here"   onChange={handleForm}   />
                     </div>    
+
+                    <button type='button' onClick={updateForm}>add note</button>
                 </div>
                     
             </form>
