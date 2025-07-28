@@ -44,6 +44,7 @@ function defineTypeOfView () {
 
 
 console.log(" this is the context shared storage :     ",sharedNotesStorage);
+console.log(" this is the context shared storage :     ",sharedNotesStorage.length);
 
 useEffect(() => {
     defineTypeOfView()
@@ -68,11 +69,12 @@ function handleClickedId (e) {
 
     
     useEffect(() => {
-        if(updateForm.length > 0) {
-            localStorage.setItem("Note" , JSON.stringify(updateForm))
+        if(sharedNotesStorage.length > 0) {
+            localStorage.setItem("Note" , JSON.stringify(sharedNotesStorage))
         }     
-    }, [updateForm])
+    }, [sharedNotesStorage])
 
+    console.log("local storage is :    " , localStorage);
 
   
 
