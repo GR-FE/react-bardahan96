@@ -4,12 +4,18 @@ import './App.css'
 import { BrowserRouter } from 'react-router'
 import NotesApp from './Notes/NoteApp/NotesApp'
 
+import NotesProvider from './Notes/NoteApp/NotesProvider';
+
+
 function App() {
-  const [count, setCount] = useState(0)
+  
 
   return (
     <>
-      <NotesApp/>
+    <NotesProvider>
+        <NotesApp/>
+    </NotesProvider>        
+   
     </>
   )
 }

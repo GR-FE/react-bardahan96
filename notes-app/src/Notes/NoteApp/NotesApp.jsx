@@ -6,25 +6,31 @@
 // - Build the Note app responsive UI, try and break down the UI to small components as much as you can.
 // - Build the routing, make sure to notice the difference between the mobile version and the desktop version.
 import { useEffect, useState } from "react";
-
 import Note from "../NoteMain/Note";
 import './NotesApp.css'
-import NoteTitle from "../NoteTitle/NoteTitle";
 import { BrowserRouter, NavLink, Route, Routes, useLocation, useNavigate } from "react-router";
-import AddBtn from "./addBtn";
 import NoteContent from "../NoteContent/NoteContent";
 import SideBar from "./SideBar";
 import './mobileCss.css'
 import TopBar from "./topBar";
-import { Navigate } from "react-router";
+import { useContext } from "react";
+import { NotesContext } from "./NotesContext";
 
 
 export default function NotesApp() {
 
-const [updateForm, setUpdateForm] = useState(() => {   
-    const savedNotes = localStorage.getItem("Note");
-    return savedNotes ? JSON.parse(savedNotes) : ""
-})
+    const { sharedNotesStorage , updateStorage } = useContext(NotesContext)
+
+    console.log("this is the function of provider cotnext    ",updateStorage);
+
+
+    console.log(crypto.randomUUID());
+    
+    const [updateForm, setUpdateForm] = useState(() => {   
+        const savedNotes = localStorage.getItem("Note");
+        return savedNotes ? JSON.parse(savedNotes) : ""
+    })
+
 const [clickedId, setClickedId] = useState()
 const [isMobile, setIsMobile] = useState(false)
 
@@ -36,27 +42,30 @@ function defineTypeOfView () {
 }
 
 
+
+console.log(" this is the context shared storage :     ",sharedNotesStorage);
+
 useEffect(() => {
     defineTypeOfView()
 }, [])
 
 function handleClickedId (e) {
-    console.log("this id is :" , e.currentTarget.id);
+
     const id = e.currentTarget.id
     
     setClickedId(id)
 }
 
-console.log(clickedId);
 
 
+ 
 
 
     const updateNoteForm = (recieveData) => {
-        setUpdateForm(prev => [...prev , recieveData])
+        updateStorage(prev => [...prev , recieveData])
     }
 
-console.log(updateForm);
+
     
     useEffect(() => {
         if(updateForm.length > 0) {
@@ -71,12 +80,12 @@ console.log(updateForm);
         return (
             <div className="notesContainer">
                 <BrowserRouter>
-                    <SideBar noteId={handleClickedId} sharedStorage={updateForm}/>
+                    <SideBar noteId={handleClickedId} />
 
                     <div className="mainNote">
                         <Routes>
                             <Route path="Note" element={<Note updateNote={updateNoteForm}/>}/>
-                            <Route path={`/NoteContent/${clickedId}`} element={<NoteContent clickedId={clickedId} sharedStorage={updateForm}/>}/>
+                            <Route path={`/NoteContent/${clickedId}`} element={<NoteContent clickedId={clickedId} />}/>
                         </Routes>
                     </div>
                 </BrowserRouter>
@@ -89,17 +98,17 @@ console.log(updateForm);
         return (
             <BrowserRouter>
 
-            <TopBar clickedId={clickedId} sharedStorage={updateForm}/>
+            <TopBar clickedId={clickedId}/>
 
  
                 <div className="underLine"></div>
                 
                 <Routes>
                     
-                    <Route path="" element={ <SideBar isMobile={isMobile} noteId={handleClickedId} sharedStorage={updateForm}/>}/>
+                    <Route path="" element={ <SideBar isMobile={isMobile} noteId={handleClickedId}/>}/>
                     
                     <Route path="Note" element={<Note isMobile={isMobile} updateNote={updateNoteForm}/>}/>
-                    <Route path={`/NoteContent/${clickedId}`} element={<NoteContent clickedId={clickedId} sharedStorage={updateForm}/>}/>
+                    <Route path={`/NoteContent/${clickedId}`} element={<NoteContent clickedId={clickedId}/>}/>
                     
                    
                     

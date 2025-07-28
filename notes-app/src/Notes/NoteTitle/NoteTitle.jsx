@@ -7,18 +7,21 @@ import MediumPriority from "./Priority/MediumPriority";
 import HighPriority from "./Priority/HighPriority";
 import { Navigate } from "react-router";
 import { useParams } from "react-router";
-export default function NoteTitle({sharedStorage, noteName, noteId}) {
+import { useContext } from "react";
+import { NotesContext } from "../NoteApp/NotesContext";
 
+export default function NoteTitle({ noteId}) {
 
-    console.log([...sharedStorage].map((noteIt) => noteIt.id));
+const {sharedNotesStorage } = useContext(NotesContext)
+
   
 
-    const lowPriority =  [...sharedStorage].filter((note) => note.priority == "lowPriority")
-    const mediumPriority =  [...sharedStorage].filter((note) => note.priority == "mediumPriority")
-    const highPriority =  [...sharedStorage].filter((note) => note.priority == "highPriority")
+    const lowPriority =  [...sharedNotesStorage].filter((note) => note.priority == "lowPriority")
+    const mediumPriority =  [...sharedNotesStorage].filter((note) => note.priority == "mediumPriority")
+    const highPriority =  [...sharedNotesStorage].filter((note) => note.priority == "highPriority")
 
-    const title = [...sharedStorage].filter((note) => note.id == noteName)
-    console.log(sharedStorage);
+    console.log("  this is the shared ntoes storage of title     :     ", sharedNotesStorage);
+    
     return (
         
         <div>

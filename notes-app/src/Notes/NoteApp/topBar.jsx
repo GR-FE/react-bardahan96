@@ -1,8 +1,11 @@
 import { useEffect } from "react"
 import { NavLink, useLocation } from "react-router"
+import { useContext } from "react"
+import { NotesContext } from "./NotesContext"
 
+export default function TopBar({ clickedId}) {
 
-export default function TopBar({sharedStorage, clickedId}) {
+    const { sharedNotesStorage } = useContext(NotesContext)
 
     const location = useLocation()
 
@@ -14,7 +17,7 @@ export default function TopBar({sharedStorage, clickedId}) {
          </NavLink>
 
 
-    const noteTitle = [...sharedStorage].find((note) => `/NoteContent/${note.id}` == location.pathname && `/NoteContent/${clickedId}` )
+    const noteTitle = [...sharedNotesStorage].find((note) => `/NoteContent/${note.id}` == location.pathname && `/NoteContent/${clickedId}` )
 
     return (
         <div className="noteHeader">

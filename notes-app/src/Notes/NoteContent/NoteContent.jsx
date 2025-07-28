@@ -1,22 +1,18 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import { useParams } from "react-router";
+import { useContext } from "react";
+import { NotesContext } from "../NoteApp/NotesContext";
 
 
 
+export default function NoteContent({ clickedId}) {
 
-export default function NoteContent({sharedStorage, clickedId}) {
+    const { sharedNotesStorage } = useContext(NotesContext);
+    
+    
+        const select = [...sharedNotesStorage].find((note) => note.id == clickedId)
 
-    console.log(clickedId);
-        const select = [...sharedStorage].find((note) => note.id == clickedId)
-
-       console.log(select);
-
-        useEffect(() => {
-            console.log(select);
-        },[])
-
-        console.log(select);
 
 
     return (
