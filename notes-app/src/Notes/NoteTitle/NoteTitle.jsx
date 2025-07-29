@@ -10,6 +10,8 @@ import { useParams } from "react-router";
 import { useContext } from "react";
 import { NotesContext } from "../NoteApp/NotesContext";
 
+
+
 export default function NoteTitle({ noteId}) {
 
 const {sharedNotesStorage } = useContext(NotesContext)

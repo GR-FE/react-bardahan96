@@ -1,11 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NotesContext } from "./NotesContext";
+import { UsersContext } from "../Users.jsx/UsersContext";
+import { useContext } from "react";
 
 export default function NotesProvider({children}) {
-    const [sharedNotesStorage, setSharedStorage] = useState(() => {   
-        const savedNotes = localStorage.getItem("Note");
-        return savedNotes ? JSON.parse(savedNotes) : ""
-    })
+
+const { users , user } = useContext(UsersContext)
+
+useEffect(() => {
+    console.log("this is the array of users", users);
+    console.log(" this is the user:  ",user);
+})
+
+    const [sharedNotesStorage, setSharedStorage] = useState([])
+
+    useEffect(() => {
+        const savedNotes = localStorage.getItem(`${user} Note`);
+        if (savedNotes) {
+          setSharedStorage(JSON.parse(savedNotes));
+        } else {
+          setSharedStorage([]);
+        }
+      }, [user]);
+      
+
 
     const updateStorage = (recievedData) => {
         setSharedStorage(recievedData)

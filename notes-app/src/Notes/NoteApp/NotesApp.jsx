@@ -15,6 +15,7 @@ import './mobileCss.css'
 import TopBar from "./topBar";
 import { useContext } from "react";
 import { NotesContext } from "./NotesContext";
+import { UsersContext } from "../Users.jsx/UsersContext";
 
 
 export default function NotesApp() {
@@ -41,10 +42,8 @@ function defineTypeOfView () {
     }
 }
 
+const { users , user } = useContext(UsersContext)
 
-
-console.log(" this is the context shared storage :     ",sharedNotesStorage);
-console.log(" this is the context shared storage :     ",sharedNotesStorage.length);
 
 useEffect(() => {
     defineTypeOfView()
@@ -70,7 +69,7 @@ function handleClickedId (e) {
     
     useEffect(() => {
         if(sharedNotesStorage.length > 0) {
-            localStorage.setItem("Note" , JSON.stringify(sharedNotesStorage))
+            localStorage.setItem(`${user} Note` , JSON.stringify(sharedNotesStorage))
         }     
     }, [sharedNotesStorage])
 
