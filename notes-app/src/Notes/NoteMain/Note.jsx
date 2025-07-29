@@ -3,6 +3,8 @@ import './Note.css'
 import { useNavigate } from 'react-router';
 import { forwardRef , useImperativeHandle } from 'react';
 import { useLocation } from 'react-router';
+import { UsersContext } from '../Users.jsx/UsersContext';
+import { useContext } from 'react';
 
 
 export default function Note({updateNote, isMobile}) {
@@ -11,21 +13,27 @@ export default function Note({updateNote, isMobile}) {
     const [noteData, setNoteData] = useState([])
     const [priority, setPriority] = useState(null)
 
+    const { users } = useContext(UsersContext)
+
     const handleForm = (e) => {
         const id = crypto.randomUUID()
+        const userName = users
         setNoteData({
-            ...noteData, [e.target.name]: e.target.value , id
+            ...noteData, userName,  [e.target.name]: e.target.value , id 
         }) 
 
         
     }
 
+        
     const updateForm = () => { 
         if (noteData.title == 0) return     
         setIsSaved(true)
         updateNote(noteData)
         clearInput()
     }
+
+   
 
     useEffect(() => {
         setInterval(() => {

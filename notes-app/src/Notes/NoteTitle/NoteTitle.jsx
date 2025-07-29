@@ -9,19 +9,20 @@ import { Navigate } from "react-router";
 import { useParams } from "react-router";
 import { useContext } from "react";
 import { NotesContext } from "../NoteApp/NotesContext";
+import { UsersContext } from "../Users.jsx/UsersContext";
+
 
 export default function NoteTitle({ noteId}) {
 
-const {sharedNotesStorage } = useContext(NotesContext)
+    const { sharedNotesStorage } = useContext(NotesContext)
 
-  
+
 
     const lowPriority =  [...sharedNotesStorage].filter((note) => note.priority == "lowPriority")
     const mediumPriority =  [...sharedNotesStorage].filter((note) => note.priority == "mediumPriority")
     const highPriority =  [...sharedNotesStorage].filter((note) => note.priority == "highPriority")
 
-    console.log("  this is the shared ntoes storage of title     :     ", sharedNotesStorage);
-    
+
     return (
         
         <div>

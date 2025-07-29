@@ -15,24 +15,18 @@ import './mobileCss.css'
 import TopBar from "./topBar";
 import { useContext } from "react";
 import { NotesContext } from "./NotesContext";
-
+import { UsersContext } from "../Users.jsx/UsersContext";
 
 export default function NotesApp() {
 
     const { sharedNotesStorage , updateStorage } = useContext(NotesContext)
-
-    console.log("this is the function of provider cotnext    ",updateStorage);
-
-
-    console.log(crypto.randomUUID());
-    
-    const [updateForm, setUpdateForm] = useState(() => {   
-        const savedNotes = localStorage.getItem("Note");
-        return savedNotes ? JSON.parse(savedNotes) : ""
-    })
-
 const [clickedId, setClickedId] = useState()
 const [isMobile, setIsMobile] = useState(false)
+
+
+const { users } = useContext(UsersContext)
+
+
 
 function defineTypeOfView () {
     const width = window.innerWidth
@@ -40,11 +34,6 @@ function defineTypeOfView () {
         setIsMobile(true)
     }
 }
-
-
-
-console.log(" this is the context shared storage :     ",sharedNotesStorage);
-console.log(" this is the context shared storage :     ",sharedNotesStorage.length);
 
 useEffect(() => {
     defineTypeOfView()
@@ -59,22 +48,21 @@ function handleClickedId (e) {
 
 
 
- 
-
-
     const updateNoteForm = (recieveData) => {
         updateStorage(prev => [...prev , recieveData])
     }
 
 
-    
-    useEffect(() => {
-        if(sharedNotesStorage.length > 0) {
-            localStorage.setItem("Note" , JSON.stringify(sharedNotesStorage))
-        }     
-    }, [sharedNotesStorage])
 
-    console.log("local storage is :    " , localStorage);
+
+
+    useEffect(() => {
+        if (sharedNotesStorage.length > 0) {
+            localStorage.setItem(`${users} Notes`, JSON.stringify(sharedNotesStorage)); // optional duplicate
+
+        }
+    }, [sharedNotesStorage]);
+
 
   
 
