@@ -8,11 +8,16 @@ export default function UsersProvider({children}) {
         const savedUsers = localStorage.getItem("Users");
         return savedUsers ? JSON.parse(savedUsers) : []
     })
-    const ref = useRef()
+    
 
-    useEffect(() => {
-        console.log(ref.current);
-    },[])
+    const [isPop, setIsPop] = useState(false)
+
+
+    const toggleModal = () => {
+        setIsPop(true)
+    }
+
+ 
 
     
     const [user, setUser] = useState("")
@@ -37,17 +42,15 @@ const createUser = () => {
     // });
     if( user.length > 0) {
         setUsers(prev => [...prev, user]) 
+
     }
 }
-
-useEffect(() => {
-    console.log(users);
-}, [])
 
 
 const handleUploadUser = (e) => {
     
     setUploadUser(e.currentTarget.id)
+    setIsPop(false)
 }
 
 
@@ -58,7 +61,7 @@ useEffect(() => {
 
     
     return (
-        <UsersContext.Provider value={{users , user , handleUser, createUser , uploadUser , handleUploadUser}}>
+        <UsersContext.Provider value={{users , user , handleUser, createUser , uploadUser , handleUploadUser, toggleModal, isPop}}>
 
         <div>
             

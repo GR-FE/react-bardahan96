@@ -17,6 +17,7 @@ import { useContext } from "react";
 import { NotesContext } from "./NotesContext";
 import { UsersContext } from "../Users.jsx/UsersContext";
 import UserModal from "../Users.jsx/UserModal";
+import UserSwitch from "../Users.jsx/UserSwitch";
 
 
 export default function NotesApp() {
@@ -24,7 +25,7 @@ export default function NotesApp() {
     const { sharedNotesStorage , updateStorage } = useContext(NotesContext)
 
 
-const [isPop, setIsPop] = useState(false)
+
 const [clickedId, setClickedId] = useState()
 const [isMobile, setIsMobile] = useState(false)
 const [overlay, setOverlay] = useState("gray")
@@ -36,7 +37,7 @@ function defineTypeOfView () {
     }
 }
 
-const { users , user , uploadUser } = useContext(UsersContext)
+const { users , user , isPop } = useContext(UsersContext)
 
 
 useEffect(() => {
@@ -68,9 +69,6 @@ function handleClickedId (e) {
     }, [sharedNotesStorage])
 
 
-    const openModal = () => {
-        setIsPop(true)
-    }
 
   
 
@@ -78,10 +76,7 @@ function handleClickedId (e) {
         return (
             <div className="notesContainer">
                 <BrowserRouter>
-                    <div className="switchContainer">
-                        <button onClick={openModal} >Switch</button>
-                        <div><span>{uploadUser}</span></div>
-                    </div>
+                    <UserSwitch/>
                     
 
                     {(isPop) && <UserModal />}
