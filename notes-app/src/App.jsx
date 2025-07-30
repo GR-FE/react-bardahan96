@@ -5,6 +5,7 @@ import { BrowserRouter } from 'react-router'
 import NotesApp from './Notes/NoteApp/NotesApp'
 import UsersProvider from './Notes/Users.jsx/UsersProvider';
 import NotesProvider from './Notes/NoteApp/NotesProvider';
+import './Notes/Users.jsx/Users.css'
 
 
 function App() {
@@ -12,11 +13,13 @@ function App() {
 
   return (
     <>
+    
     <UsersProvider>
     <NotesProvider>
         <NotesApp/>
     </NotesProvider>        
     </UsersProvider>
+   
    
     </>
   )

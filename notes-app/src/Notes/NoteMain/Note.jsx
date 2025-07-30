@@ -19,6 +19,7 @@ export default function Note({updateNote, isMobile}) {
         const userName = user
         setNoteData({
             ...noteData, [e.target.name]: e.target.value , id , userName
+            
         }) 
 
         

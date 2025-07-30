@@ -1,34 +1,69 @@
 import { useEffect, useState } from "react";
 import { UsersContext } from "./UsersContext";
-
+import UserModal from "./UserModal";
+import { useRef } from "react";
 
 export default function UsersProvider({children}) {
-    const [users, setUsers] = useState([])
-    const [user, setUser] = useState()
+    const [users, setUsers] = useState(() => {
+        const savedUsers = localStorage.getItem("Users");
+        return savedUsers ? JSON.parse(savedUsers) : []
+    })
+    const ref = useRef()
+
+    useEffect(() => {
+        console.log(ref.current);
+    },[])
+
+    
+    const [user, setUser] = useState("")
+    const [uploadUser, setUploadUser] = useState("")
 
 const handleUser = (e) => {
-    setUser(e.target.value)
+    setUser(e.currentTarget.value)
 }
+
+// useEffect(() => {
+//     setUsers ( prev => [...prev, user])
+// }, [])
+
+
 
 const createUser = () => {
-    setUsers(prev => [...prev, user])
-    
+    // users.forEach(user => {
+    //     if( user == user) {
+    //         setUser("")
+    //         alert("please pick another name")
+    //     }     
+    // });
+    if( user.length > 0) {
+        setUsers(prev => [...prev, user]) 
+    }
 }
 
-useEffect(() =>{
+useEffect(() => {
     console.log(users);
-}, [users])
+}, [])
+
+
+const handleUploadUser = (e) => {
+    
+    setUploadUser(e.currentTarget.id)
+}
+
+
+useEffect(() => {
+    localStorage.setItem("Users" , JSON.stringify(users))
+},[users])
+
+
     
     return (
-        <UsersContext.Provider value={{users , user}}>
+        <UsersContext.Provider value={{users , user , handleUser, createUser , uploadUser , handleUploadUser}}>
 
-            <div>
-            <div>
-                <button onClick={createUser}>add user</button>
-                <input type="text" placeholder="username please" onChange={handleUser} value={user} />
-            </div>
-            {children}
-            </div>
+        <div>
+            
+        {children}
+         </div>
         </UsersContext.Provider>
     )
     

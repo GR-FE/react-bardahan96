@@ -16,24 +16,18 @@ import TopBar from "./topBar";
 import { useContext } from "react";
 import { NotesContext } from "./NotesContext";
 import { UsersContext } from "../Users.jsx/UsersContext";
+import UserModal from "../Users.jsx/UserModal";
 
 
 export default function NotesApp() {
 
     const { sharedNotesStorage , updateStorage } = useContext(NotesContext)
 
-    console.log("this is the function of provider cotnext    ",updateStorage);
 
-
-    console.log(crypto.randomUUID());
-    
-    const [updateForm, setUpdateForm] = useState(() => {   
-        const savedNotes = localStorage.getItem("Note");
-        return savedNotes ? JSON.parse(savedNotes) : ""
-    })
-
+const [isPop, setIsPop] = useState(false)
 const [clickedId, setClickedId] = useState()
 const [isMobile, setIsMobile] = useState(false)
+const [overlay, setOverlay] = useState("gray")
 
 function defineTypeOfView () {
     const width = window.innerWidth
@@ -42,7 +36,7 @@ function defineTypeOfView () {
     }
 }
 
-const { users , user } = useContext(UsersContext)
+const { users , user , uploadUser } = useContext(UsersContext)
 
 
 useEffect(() => {
@@ -73,7 +67,10 @@ function handleClickedId (e) {
         }     
     }, [sharedNotesStorage])
 
-    console.log("local storage is :    " , localStorage);
+
+    const openModal = () => {
+        setIsPop(true)
+    }
 
   
 
@@ -81,6 +78,13 @@ function handleClickedId (e) {
         return (
             <div className="notesContainer">
                 <BrowserRouter>
+                    <div className="switchContainer">
+                        <button onClick={openModal} >Switch</button>
+                        <div><span>{uploadUser}</span></div>
+                    </div>
+                    
+
+                    {(isPop) && <UserModal />}
                     <SideBar noteId={handleClickedId} />
 
                     <div className="mainNote">
@@ -99,9 +103,9 @@ function handleClickedId (e) {
         return (
             <BrowserRouter>
 
-            <TopBar clickedId={clickedId}/>
+            <TopBar  clickedId={clickedId}/>
 
- 
+                
                 <div className="underLine"></div>
                 
                 <Routes>

@@ -5,23 +5,20 @@ import { useContext } from "react";
 
 export default function NotesProvider({children}) {
 
-const { users , user } = useContext(UsersContext)
+const { users , user , uploadUser } = useContext(UsersContext)
 
-useEffect(() => {
-    console.log("this is the array of users", users);
-    console.log(" this is the user:  ",user);
-})
 
     const [sharedNotesStorage, setSharedStorage] = useState([])
 
     useEffect(() => {
-        const savedNotes = localStorage.getItem(`${user} Note`);
+        
+        const savedNotes = localStorage.getItem(`${uploadUser} Note`);
         if (savedNotes) {
           setSharedStorage(JSON.parse(savedNotes));
         } else {
           setSharedStorage([]);
         }
-      }, [user]);
+      }, [uploadUser]);
       
 
 
