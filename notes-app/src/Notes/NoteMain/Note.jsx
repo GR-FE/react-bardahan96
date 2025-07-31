@@ -10,7 +10,6 @@ export default function Note({updateNote, isMobile}) {
 
     const [isSaved, setIsSaved] = useState(false)
     const [noteData, setNoteData] = useState([])
-    const [priority, setPriority] = useState(null)
 
     const { user } = useContext(UsersContext)
 
@@ -18,11 +17,8 @@ export default function Note({updateNote, isMobile}) {
         const id = crypto.randomUUID()
         const userName = user
         setNoteData({
-            ...noteData, [e.target.name]: e.target.value , id , userName
-            
-        }) 
-
-        
+            ...noteData, [e.target.name]: e.target.value , id , userName 
+        })   
     }
 
     const updateForm = () => { 

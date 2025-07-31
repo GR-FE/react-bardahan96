@@ -6,55 +6,44 @@
 // - Build the Note app responsive UI, try and break down the UI to small components as much as you can.
 // - Build the routing, make sure to notice the difference between the mobile version and the desktop version.
 import { useEffect, useState } from "react";
-import Note from "../NoteMain/Note";
-import './NotesApp.css'
-import { BrowserRouter, NavLink, Route, Routes, useLocation, useNavigate } from "react-router";
-import NoteContent from "../NoteContent/NoteContent";
-import SideBar from "./SideBar";
-import './mobileCss.css'
-import TopBar from "./topBar";
 import { useContext } from "react";
 import { NotesContext } from "./NotesContext";
 import { UsersContext } from "../Users.jsx/UsersContext";
+import { BrowserRouter, NavLink, Route, Routes, useLocation, useNavigate } from "react-router";
+import SideBar from "./SideBar";
+import Note from "../NoteMain/Note";
+import NoteContent from "../NoteContent/NoteContent";
+import TopBar from "./topBar";
 import UserModal from "../Users.jsx/UserModal";
 import UserSwitch from "../Users.jsx/UserSwitch";
+import './NotesApp.css'
+import './mobileCss.css'
 
 
 export default function NotesApp() {
 
     const { sharedNotesStorage , updateStorage } = useContext(NotesContext)
+    const { users , user , isPop } = useContext(UsersContext)
 
+    const [clickedId, setClickedId] = useState()
+    const [isMobile, setIsMobile] = useState(false)
+    const [overlay, setOverlay] = useState("gray")
 
-
-const [clickedId, setClickedId] = useState()
-const [isMobile, setIsMobile] = useState(false)
-const [overlay, setOverlay] = useState("gray")
-
-function defineTypeOfView () {
-    const width = window.innerWidth
-    if(width < 431) {
-        setIsMobile(true)
+    function defineTypeOfView () {
+        const width = window.innerWidth
+        if(width < 431) {
+            setIsMobile(true)
+        }
     }
-}
 
-const { users , user , isPop } = useContext(UsersContext)
+    useEffect(() => {
+        defineTypeOfView()
+    }, [])
 
-
-useEffect(() => {
-    defineTypeOfView()
-}, [])
-
-function handleClickedId (e) {
-
-    const id = e.currentTarget.id
-    
-    setClickedId(id)
-}
-
-
-
- 
-
+    function handleClickedId (e) {
+        const id = e.currentTarget.id  
+        setClickedId(id)
+    }
 
     const updateNoteForm = (recieveData) => {
         updateStorage(prev => [...prev , recieveData])
@@ -68,17 +57,11 @@ function handleClickedId (e) {
         }     
     }, [sharedNotesStorage])
 
-
-
-  
-
     if (!isMobile) {
         return (
             <div className="notesContainer">
                 <BrowserRouter>
                     <UserSwitch/>
-                    
-
                     {(isPop) && <UserModal />}
                     <SideBar noteId={handleClickedId} />
 
@@ -93,25 +76,15 @@ function handleClickedId (e) {
         )
     }
     
-
     if(isMobile) {
         return (
             <BrowserRouter>
-
-            <TopBar  clickedId={clickedId}/>
-
-                
-                <div className="underLine"></div>
-                
+            <   TopBar  clickedId={clickedId}/>   
+                <div className="underLine"></div>   
                 <Routes>
-                    
                     <Route path="" element={ <SideBar isMobile={isMobile} noteId={handleClickedId}/>}/>
-                    
                     <Route path="Note" element={<Note isMobile={isMobile} updateNote={updateNoteForm}/>}/>
-                    <Route path={`/NoteContent/${clickedId}`} element={<NoteContent clickedId={clickedId}/>}/>
-                    
-                   
-                    
+                    <Route path={`/NoteContent/${clickedId}`} element={<NoteContent clickedId={clickedId}/>}/>  
                 </Routes>
             </BrowserRouter>
         )
