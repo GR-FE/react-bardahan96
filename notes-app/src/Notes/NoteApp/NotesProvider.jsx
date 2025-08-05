@@ -17,6 +17,12 @@ const { users , user , uploadUser } = useContext(UsersContext)
               setSharedStorage([]);
             }
       }, [uploadUser]);
+
+      useEffect(() => {
+        if(sharedNotesStorage.length > 0) {
+            localStorage.setItem(`${user} Note` , JSON.stringify(sharedNotesStorage))
+        }     
+    }, [sharedNotesStorage])
       
     const updateStorage = (recievedData) => {
         setSharedStorage(recievedData)

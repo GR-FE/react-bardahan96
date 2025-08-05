@@ -1,15 +1,20 @@
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { NotesContext } from "../NoteApp/NotesContext";
 import LowPriority from "./Priority/LowPriority";
 import MediumPriority from "./Priority/MediumPriority";
 import HighPriority from "./Priority/HighPriority";
 import './NoteTitle.css'
+import { useLocation } from "react-router";
 
 
 export default function NoteTitle({ noteId}) {
 
-const {sharedNotesStorage } = useContext(NotesContext)
+    const location = useLocation()
+
+const {sharedNotesStorage ,noteData } = useContext(NotesContext)
+    
+
 
     const lowPriority =  [...sharedNotesStorage].filter((note) => note.priority == "lowPriority")
     const mediumPriority =  [...sharedNotesStorage].filter((note) => note.priority == "mediumPriority")

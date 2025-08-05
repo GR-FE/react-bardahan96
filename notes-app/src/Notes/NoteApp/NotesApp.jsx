@@ -19,15 +19,13 @@ import UserSwitch from "../Users.jsx/UserSwitch";
 import './NotesApp.css'
 import './mobileCss.css'
 
-
 export default function NotesApp() {
 
     const { sharedNotesStorage , updateStorage } = useContext(NotesContext)
-    const { users , user , isPop } = useContext(UsersContext)
+    const {  isPop } = useContext(UsersContext)
 
     const [clickedId, setClickedId] = useState()
     const [isMobile, setIsMobile] = useState(false)
-    const [overlay, setOverlay] = useState("gray")
 
     function defineTypeOfView () {
         const width = window.innerWidth
@@ -49,14 +47,6 @@ export default function NotesApp() {
         updateStorage(prev => [...prev , recieveData])
     }
 
-
-    
-    useEffect(() => {
-        if(sharedNotesStorage.length > 0) {
-            localStorage.setItem(`${user} Note` , JSON.stringify(sharedNotesStorage))
-        }     
-    }, [sharedNotesStorage])
-
     if (!isMobile) {
         return (
             <div className="notesContainer">
@@ -68,7 +58,7 @@ export default function NotesApp() {
                     <div className="mainNote">
                         <Routes>
                             <Route path="Note" element={<Note updateNote={updateNoteForm}/>}/>
-                            <Route path={`/NoteContent/${clickedId}`} element={<NoteContent clickedId={clickedId} />}/>
+                            <Route path={`/NoteContent/:noteId`} element={<NoteContent clickedId={clickedId} />}/>
                         </Routes>
                     </div>
                 </BrowserRouter>
@@ -84,7 +74,7 @@ export default function NotesApp() {
                 <Routes>
                     <Route path="" element={ <SideBar isMobile={isMobile} noteId={handleClickedId}/>}/>
                     <Route path="Note" element={<Note isMobile={isMobile} updateNote={updateNoteForm}/>}/>
-                    <Route path={`/NoteContent/${clickedId}`} element={<NoteContent clickedId={clickedId}/>}/>  
+                    <Route path={`/NoteContent/:noteId`} element={<NoteContent clickedId={clickedId}/>}/>  
                 </Routes>
             </BrowserRouter>
         )

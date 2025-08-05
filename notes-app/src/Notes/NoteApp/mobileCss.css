@@ -1,6 +1,9 @@
 
 .prevBtn{
     background-color: #fff;
+    position: absolute;
+    left: 3%;
+    top: 3.5%;
 }
 
 .underLine{
@@ -13,7 +16,7 @@
     display: flex;
         flex-direction: row-reverse;
         align-items: center;
-        justify-content: space-around;
+        justify-content: center;
         width: 90%;
 }
 

@@ -36,7 +36,7 @@ export default function UsersProvider({children}) {
     },[users])
 
     return (
-        <UsersContext.Provider value={{users , user , handleUser, createUser , uploadUser , handleUploadUser, toggleModal, isPop}}>
+        <UsersContext.Provider value={{users , user , handleUser, createUser , uploadUser , handleUploadUser, toggleModal, isPop, setIsPop}}>
         <div>   
             {children}
         </div>
