@@ -5,6 +5,7 @@
 // - The note name on the list should be the title.
 // - Build the Note app responsive UI, try and break down the UI to small components as much as you can.
 // - Build the routing, make sure to notice the difference between the mobile version and the desktop version.
+//asdasdas
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { NotesContext } from "./NotesContext";
