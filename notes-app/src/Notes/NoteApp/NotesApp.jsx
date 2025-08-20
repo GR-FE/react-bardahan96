@@ -9,21 +9,22 @@
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { NotesContext } from "./NotesContext";
-import { UsersContext } from "../Users.jsx/UsersContext";
+// import { UsersContext } from "../Users.jsx/UsersContext";
 import { BrowserRouter, NavLink, Route, Routes, useLocation, useNavigate } from "react-router";
 import SideBar from "./SideBar";
 import Note from "../NoteMain/Note";
 import NoteContent from "../NoteContent/NoteContent";
 import TopBar from "./topBar";
-import UserModal from "../Users.jsx/UserModal";
-import UserSwitch from "../Users.jsx/UserSwitch";
+// import UserModal from "../Users.jsx/UserModal";
+// import UserSwitch from "../Users.jsx/UserSwitch";
 import './NotesApp.css'
 import './mobileCss.css'
 
+
 export default function NotesApp() {
 
-    const { sharedNotesStorage , updateStorage } = useContext(NotesContext)
-    const {  isPop } = useContext(UsersContext)
+    const { sharedNotesStorage , updateStorage, pushNotes  } = useContext(NotesContext)
+    // const {  isPop } = useContext(UsersContext)
 
     const [clickedId, setClickedId] = useState()
     const [isMobile, setIsMobile] = useState(false)
@@ -45,25 +46,33 @@ export default function NotesApp() {
     }
 
     const updateNoteForm = (recieveData) => {
+
         updateStorage(prev => [...prev , recieveData])
     }
+
+  
+
 
     if (!isMobile) {
         return (
             <div className="notesContainer">
+                
+                
                 <BrowserRouter>
-                    <UserSwitch/>
-                    {(isPop) && <UserModal />}
+                    {/* <UserSwitch/>
+                    {(isPop) && <UserModal />} */}
                     <SideBar noteId={handleClickedId} />
 
                     <div className="mainNote">
                         <Routes>
-                            <Route path="Note" element={<Note updateNote={updateNoteForm}/>}/>
-                            <Route path={`/NoteContent/:noteId`} element={<NoteContent clickedId={clickedId} />}/>
+                        <Route path="Note" element={<Note clickedId={clickedId} updateNote={updateNoteForm}/>}/>
+                            <Route path="Note/:noteId" element={<Note clickedId={clickedId} updateNote={updateNoteForm}/>}/>
+                            {/* <Route path={`/NoteContent/:noteId`} element={<NoteContent clickedId={clickedId} />}/> */}
                         </Routes>
                     </div>
                 </BrowserRouter>
             </div>
+            
         )
     }
     
@@ -75,7 +84,8 @@ export default function NotesApp() {
                 <Routes>
                     <Route path="" element={ <SideBar isMobile={isMobile} noteId={handleClickedId}/>}/>
                     <Route path="Note" element={<Note isMobile={isMobile} updateNote={updateNoteForm}/>}/>
-                    <Route path={`/NoteContent/:noteId`} element={<NoteContent clickedId={clickedId}/>}/>  
+                    <Route path="Note/:noteId" element={<Note clickedId={clickedId} updateNote={updateNoteForm}/>}/>
+                    {/* <Route path={`/NoteContent/:noteId`} element={<NoteContent clickedId={clickedId}/>}/>   */}
                 </Routes>
             </BrowserRouter>
         )

@@ -2,16 +2,19 @@ import { BrowserRouter, NavLink, Link } from "react-router";
 
 
 export default function HighPriority({noteId,  highPriority}) {
+
+
+    
     
     return (
         <div>
             {[...highPriority].length > 0 && <h2>High priority</h2>}
-            {[...highPriority].map((note, index) => {
+            {[...highPriority].map((note) => {
                 return (
                  
-                 <div>
-                    <NavLink onClick={noteId} id={note.id} to={`/NoteContent/${note.id}`} key={note.id}>
-                        <div className="noteTitle">
+                 <div key={note.id}>
+                    <NavLink onClick={noteId} id={note.id} to={`/Note/${note.id}`} key={note.id}>
+                        <div key={note.id} className="noteTitle">
                             <span>{note.title}</span>
                             <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M1 1L7 7L1 13" stroke="#9EA2AE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -19,6 +22,7 @@ export default function HighPriority({noteId,  highPriority}) {
                         </div> 
                     </NavLink>    
                  </div>
+                 
                 )
             })} 
         </div>

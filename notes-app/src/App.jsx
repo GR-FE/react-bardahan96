@@ -3,7 +3,7 @@ import { useState } from 'react'
 import './App.css'
 import { BrowserRouter } from 'react-router'
 import NotesApp from './Notes/NoteApp/NotesApp'
-import UsersProvider from './Notes/Users.jsx/UsersProvider';
+// import UsersProvider from './Notes/Users.jsx/UsersProvider';
 import NotesProvider from './Notes/NoteApp/NotesProvider';
 import './Notes/Users.jsx/Users.css'
 
@@ -14,11 +14,11 @@ function App() {
   return (
     <>
     
-    <UsersProvider>
+    {/* <UsersProvider> */}
     <NotesProvider>
         <NotesApp/>
     </NotesProvider>        
-    </UsersProvider>
+    {/* </UsersProvider> */}
    
    
     </>

@@ -7,11 +7,11 @@ export default function HighPriority({noteId,  lowPriority}) {
     return (
         <div>
                {[...lowPriority].length > 0 && <h2>Low priority</h2>}
-               {[...lowPriority].map((note, index) => {
+               {[...lowPriority].map((note) => {
                    return (
                     
-                    <div>
-                       <NavLink onClick={noteId} id={note.id} to={`/NoteContent/${note.id}`} key={note.id}>
+                    <div key={note.id}>
+                       <NavLink onClick={noteId} id={note.id} to={`/Note/${note.id}`} key={note.id}>
                             <div className="noteTitle">
                                 <span>{note.title}</span>
                                 <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">

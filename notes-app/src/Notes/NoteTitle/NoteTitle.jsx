@@ -13,12 +13,23 @@ export default function NoteTitle({ noteId}) {
     const location = useLocation()
 
 const {sharedNotesStorage ,noteData } = useContext(NotesContext)
+
+
+
     
 
 
     const lowPriority =  [...sharedNotesStorage].filter((note) => note.priority == "lowPriority")
     const mediumPriority =  [...sharedNotesStorage].filter((note) => note.priority == "mediumPriority")
     const highPriority =  [...sharedNotesStorage].filter((note) => note.priority == "highPriority")
+
+    // useEffect(() => {
+    //     console.log("tha shared storage", sharedNotesStorage);
+    //     console.log("medium priority:", mediumPriority);
+    //     console.log("high pirority:",  highPriority);
+    //     console.log("low priority:" , lowPriority);
+
+    // }, [sharedNotesStorage])
 
     return (        
         <div>

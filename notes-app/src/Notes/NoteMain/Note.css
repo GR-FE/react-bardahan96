@@ -32,17 +32,14 @@
     
     .inputNote{
         height: 40vh;
-
-        &::placeholder{
-            transform: translateY(-17vh);
-            
-        }
     }
 
     .inputPriority{    
         color: #9f9999;
     }
 }
+
+
 
 .saved{
     color: gray;
