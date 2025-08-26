@@ -1,0 +1,92 @@
+
+.prevBtn{
+    background-color: #fff;
+    position: absolute;
+    left: 3%;
+    top: 3.5%;
+}
+
+.underLine{
+    height: 1px;
+    background: rgb(178, 174, 174);
+    width: 100vw;
+}
+
+.noteHeader{
+    display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        justify-content: center;
+        width: 90%;
+}
+
+@media( max-width:431px) {
+
+    .noteHeadLine{
+        font-size: 26px;
+    }
+
+#root{
+    height: 100vh;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+body{
+    width: 98vw;
+    height: 100vh;
+}
+
+.formContainer{
+    padding: 0 0 0 0.5rem;
+
+    h1{
+        font-size: 24px;
+    }
+}
+
+.noteForm {
+    width: 80%;
+    margin: auto;
+}
+
+form{
+    width: 90%;
+}
+
+.sideNote{
+    width: 100%;
+}
+.inputTitle, .inputNote, .inputPriority{
+    width: 100%;
+}
+
+
+.noteHeader{
+    height: 15%;
+    width: 100%;
+}
+.sideBar{
+    padding: 0rem 2rem;
+
+    .addNote{
+        align-self: end;
+        .AddNoteBtn{
+            background-color:#4E61F6;
+            color: #fff;
+            border-radius: 0.8rem;
+            font-size: 18px;
+            padding: 1rem;
+            box-sizing: border-box;
+            margin-top: 0.8rem;
+        }
+    }
+    
+    .addNoteContainer{
+        display: flex;
+        justify-content: end;
+    }
+}
+
+}
+
