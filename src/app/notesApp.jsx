@@ -18,6 +18,7 @@ export default function NotesApp() {
 
     const selectedUser = useSelector((state) => state.usersController.selectedUser)
     const noteData = useSelector((state) => state.notesStorage.noteData)
+    const notesStorageData = useSelector((state) => state.notesStorage.notesStorageData)
     const isPop = useSelector((state) => state.usersController.isPop)
     const [isMobile, setIsMobile] = useState(false)
       const [isSaved,setIsSaved] = useState(false)
@@ -32,12 +33,12 @@ export default function NotesApp() {
     const dispatch= useDispatch()
     useEffect(() => {
         dispatch(fetchNotes(selectedUser))
-    }, [selectedUser])
+    }, [selectedUser ])
 
 
     useEffect(() => {
         dispatch(fetchUsers())
-    }, [dispatch])
+    }, [])
 
     useEffect(() => {
         defineTypeOfView()
@@ -61,7 +62,7 @@ export default function NotesApp() {
                     <Route path="/:selectedUser" element={<UserWrraper/>} >
                         <Route path="Note" element={<Note isSaved={isSaved} setIsSaved={setIsSaved}/>}/>
                         <Route path="Note/:noteId" element={<Note isSaved={isSaved} setIsSaved={setIsSaved}/>} />
-                         {/* <Route path="/UsersSelection" element={<UsersSelectionModal/>}/> */}
+                         
                     </Route>
                 </Routes>
                 </div>
@@ -75,13 +76,19 @@ export default function NotesApp() {
   if (isMobile) {
     return (
         <BrowserRouter>
-            <TopBar/>
-            <div className="underLine"></div>   
+                    <UserSwitch/>
+                    {isPop &&<UsersSelectionModal/>}
+            {/* <TopBar/> */}
+            
             <Routes>
-                <Route path="" element={ <SideBar isMobile={isMobile} />}/>
-                <Route path="Note" element={<Note />}/>
-                <Route path="Note/:noteId" element={<Note/>}/>
-                {/* <Route path={`/NoteContent/:noteId`} element={<NoteContent clickedId={clickedId}/>}/>   */}
+                    <Route path="" element={<TopBar/>}>
+                    <Route path="/:selectedUser" element={<UserWrraper/>}>
+                        <Route path="" element={ <SideBar isMobile={isMobile} />}/>
+                        <Route path="Note" element={<Note />}/>
+                        <Route path="Note/:noteId" element={<Note/>}/>
+                        {/* <Route path={`/NoteContent/:noteId`} element={<NoteContent clickedId={clickedId}/>}/>   */}
+                    </Route>
+                </Route>
             </Routes>
         </BrowserRouter>
     )

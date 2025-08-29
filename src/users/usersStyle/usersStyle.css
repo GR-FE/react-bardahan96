@@ -1,7 +1,7 @@
 .usersModal{
     z-index: 5; 
-    width: 20%;
-    height: 40%;
+    width: 22%;
+    height: 34%;
     box-sizing: border-box;
     background-color: rgb(255, 255, 255);
     border-radius: 1.4rem;
@@ -11,7 +11,7 @@
     flex-direction: column;
     justify-content: space-around;
     color: #131927;
-
+    top: 33%;
     border: none;
 
     .switchUserHeadeTop{
@@ -42,16 +42,13 @@
         padding: 0.4rem 1rem;
         box-sizing: border-box;
         font-size: 12px;
+        cursor: pointer;
 
         &:hover{
-            
-            
             box-shadow: 1px 1px 7px 1px rgba(78, 97, 246, 0.4);
-            
             transition: 0.2s ease;
         }
     }
-    
 
     span{
         text-transform: capitalize;
@@ -96,7 +93,7 @@
 }
 
 .or{
-    text-align: justify;
+    margin-top: 0.6em;
     font-size: 12px;
 }
 
@@ -133,6 +130,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            border: none;
+            border-radius: 0.8em;
+            padding: 0.6em 0.4em;
+            cursor: pointer;
+
+            &:hover{
+                box-shadow: 1px 1px 7px 1px rgba(78, 97, 246, 0.4);
+            }
         }
     }
 }

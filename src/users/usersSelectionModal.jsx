@@ -2,6 +2,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { clsoeModal, pushUsers, selectUser } from "../app/redux/usersSlice"
 import { useNavigate } from "react-router"
 import { useEffect, useRef } from "react"
+import './usersStyle/usersStyle.css'
+
+
 
 export default function usersSelectionModal() {
 
@@ -38,13 +41,7 @@ export default function usersSelectionModal() {
       
 
 
-    useEffect(() => {
-        console.log("this is the users array: ",users);
-    }, [users])
 
-    useEffect(() => {
-        console.log("the selected user",selectedUser);
-    }, [selectedUser])
 
     if (!isModal) return null
 
@@ -75,7 +72,7 @@ export default function usersSelectionModal() {
                     { [...users].length > 0 && <span className='or'>or</span>}
                     <span className='addUser'>Add User</span>
                     <div className='createUserInput'>
-                        <input ref={usernameInput} type="text" placeholder="username please"    />
+                        <input  ref={usernameInput} type="text" placeholder="username please"    />
                         <button onClick={pushUser} >Add</button>
                     </div>
                 </div>

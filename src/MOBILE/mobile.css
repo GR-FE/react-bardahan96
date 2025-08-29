@@ -4,6 +4,7 @@
     position: absolute;
     left: 3%;
     top: 3.5%;
+    border: none;
 }
 
 .underLine{
@@ -63,8 +64,9 @@ form{
 
 
 .noteHeader{
-    height: 15%;
-    width: 100%;
+    height: 75px;
+    width: 100vw;
+    border-bottom: 1px solid #4E61F6 ;
 }
 .sideBar{
     padding: 0rem 2rem;

@@ -22,10 +22,6 @@ export default function NotesList() {
       };
 
 
-      useEffect(() => {
-        console.log("notes list note data",notesStorageData);
-      },[notesStorageData])
-
     const selectedUser = useSelector((state) => state.usersController.selectedUser)
 
     //define the arrays 

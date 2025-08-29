@@ -1,6 +1,6 @@
 // notesSlice.js
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getDocs, collection, setDoc, doc } from 'firebase/firestore';
+import { createAsyncThunk, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { getDocs, collection, setDoc, doc , onSnapshot, updateDoc } from 'firebase/firestore';
 import { db } from '../DB/firebase';
 
 
@@ -17,16 +17,26 @@ export const pushNotes = createAsyncThunk("notesStorage/pushNotes", async ({note
     priority: noteInfo.priority,
     id: noteInfo.id,
     content: noteInfo.content
-  
-  }, {merge: true})
-  return { userID, note: noteInfo}
-  
+  })
+  return  noteInfo
+})
+
+export const updateNote = createAsyncThunk("notesStorage/updateNote" , async ({noteInfo, userID}) => {
+  const NotesRef = collection(db, "NotesStorage")
+  await updateDoc(doc(NotesRef , userID , "notes" , noteInfo.id) , {
+    ...noteInfo
+  })
+  return noteInfo
 })
 
 const initialState = {
   noteData: { title: '', priority: '', content: '' },
   notesStorageData: [],
-  clickedId: null
+  clickedId: null,
+  notePageUrl: null,
+  error: null,
+  loading: null
+
   
 };
 
@@ -40,33 +50,46 @@ const notesSlice = createSlice({
       state.noteData[field] = value;
     },
     saveNote(state, action) {
-
       const noteInfo = action.payload;
-      const exitingNote = state.notesStorageData.find((note) => note.id === noteInfo.id)
-      if (exitingNote) {
-        exitingNote.title = noteInfo.title;
-        exitingNote.priority = noteInfo.priority;
-        exitingNote.content = noteInfo.content
-      } else {
       state.notesStorageData.push(noteInfo)
-      state.noteData= { title: '' , priority: '' , content: '' }
 
-      }
+
+
     },
     getClickedId(state, action) {
       state.clickedId = action.payload
+    },
+    updateUrlPath (state, action) {
+      state.notePageUrl = action.payload
     }
   },
 
   extraReducers: (builder) => {
     builder.addCase(fetchNotes.fulfilled, (state, action) => {
+      state.loading = false
       state.notesStorageData = action.payload
+      
     })
-builder.addCase(pushNotes.fulfilled, (state, action) => {
-  const note = action.payload;
-  const exitingNote = state.notesStorageData.findIndex(eNote => eNote.id === note.id);
-  if (exitingNote >= 0) state.notesStorageData[exitingNote] = note; else state.notesStorageData.push(note);
-});
+    builder.addCase(pushNotes.fulfilled, (state, action) => {
+      state.loading = false
+      state.notesStorageData.push(action.payload)
+
+    });
+    builder.addCase(updateNote.fulfilled , (state, action) => {
+      state.loading =false
+      const noteToUpdate = action.payload
+      const index = state.notesStorageData.findIndex((note) => note.id == noteToUpdate.id )
+      state.notesStorageData[index] = noteToUpdate
+    })
+
+    builder.addMatcher( isAnyOf(fetchNotes.pending , pushNotes.pending) , (state) => {
+      state.loading = true
+      console.log("loading",state.loading)
+    })
+    builder.addMatcher( isAnyOf(fetchNotes.rejected , pushNotes.rejected) , (state, action) => {
+      state.error = action.error?.message 
+      console.log(state.error)
+    })
   }
 });
 

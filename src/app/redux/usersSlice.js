@@ -4,20 +4,6 @@ import { getDocs, collection, setDoc, doc } from 'firebase/firestore';
 import { db } from '../DB/firebase';
 
 
-
-
-// export const pushNotes = createAsyncThunk("notesStorage/pushNotes", async (noteInfo) => {
-//   const NotesRef = collection(db, "NotesStorage")
-//    await setDoc(doc(NotesRef, noteInfo.id) , {
-//     title: noteInfo.title,
-//     priority: noteInfo.priority,
-//     id: noteInfo.id,
-//     content: noteInfo.content
-//   })
-
-//   return noteInfo
-// })
-
 export const pushUsers = createAsyncThunk("notesStorage/pushUsers", async (user) => {
     const usersRef = collection(db, "NotesStorage");
     await setDoc(doc(usersRef, user) , {
@@ -70,7 +56,7 @@ const usersSlice = createSlice({
     })
     builder.addCase(pushUsers.fulfilled, (state,action ) => {
         state.users.push(action.payload)
-    } )
+    })
   }
 });
 
