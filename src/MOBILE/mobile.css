@@ -92,3 +92,33 @@ form{
 
 }
 
+
+
+/*  ====== Mobile Add User ========= */
+
+.addUserContainer {
+    position: absolute;
+    top: 10%;
+    display: flex;
+    gap: 0.8rem;
+    right: 4%;
+    align-items: center;
+    .addUserBtn {
+        background-color:#4E61F6;
+        color: #fff;
+        border-radius: 0.8rem;
+        font-size: 14px;
+        padding: 0.8em 1em;
+        border: none;
+        border-radius: 0.8rem;
+        cursor: pointer;
+        transition: 0.1s  ease-in-out;
+        min-width: 136px;
+
+        &:hover{
+            box-shadow: 1px 1px 7px 1px rgba(78, 97, 246, 0.4);
+            transition: 0.2s ease;
+        }
+    }
+}
+

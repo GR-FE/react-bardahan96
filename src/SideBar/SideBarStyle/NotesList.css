@@ -6,16 +6,17 @@
     text-transform: capitalize;
     margin: 0.2em 0em;
     padding: 0.1rem 0.4rem;
-    border-top: 0.5px solid #d2d2;
+    border-top: 0.5px solid rgba(143, 143, 143, 0.133);
     padding: 0.4rem;
     cursor: pointer;
+    transition: 0.2s ease;
+
     &:hover{
-        padding: 0.3rem 0.6rem;
-        margin-top:  0;
+        transform: scale(1.02, 1.02);
         box-shadow: 1px 1px 7px 1px #d2d2d2;
-        border-radius: 0.5rem;
-        transition: 0.2s ease;
+        border-radius: 0.4rem;
     }
+    
 }
 
 .noteTitles{
@@ -31,4 +32,7 @@ h2{
     text-transform: capitalize;
 }
 
+@media (max-width: 475px) {
+
+}
 

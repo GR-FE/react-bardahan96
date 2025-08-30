@@ -1,10 +1,8 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux"
 import { useMemo } from "react";
+import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux"
 import { getClickedId } from "../app/redux/notesSlice";
-import { NavLink, useNavigate } from "react-router";
 import './SideBarStyle/NotesList.css'
-
 
 export default function NotesList() {
 
@@ -18,16 +16,15 @@ export default function NotesList() {
         const id = e.currentTarget.id;
         if (!selectedUser) return;                         
         dispatch(getClickedId(id));
-        navigate(`/${selectedUser}/Note/${id}`);             
+        navigate(`/${selectedUser}/${id}`);             
       };
-
 
     const selectedUser = useSelector((state) => state.usersController.selectedUser)
 
     //define the arrays 
-    const lowPriority = useMemo(() => {
-        return notesStorageData.filter((note) => note.priority == "lowPriority")
-    }, [notesStorageData])
+        const lowPriority = useMemo(() => {
+            return notesStorageData.filter((note) => note.priority == "lowPriority")
+        }, [notesStorageData])
     
         const mediumPriority = useMemo(() => {
             return notesStorageData.filter((note) => note.priority == "mediumPriority")
@@ -35,10 +32,8 @@ export default function NotesList() {
         
         const highPriority = useMemo(() => {
            return notesStorageData.filter((note) => note.priority == "highPriority")
-           
         }, [notesStorageData])
 
-        
     return (
         <>
         <div>

@@ -1,11 +1,11 @@
 // Note.jsx
-import { useDispatch, useSelector } from 'react-redux';
-import { updateNotes, pushNotes, updateNote } from '../app/redux/notesSlice'; // Only import what's needed
-import './mainNoteStyle/Note.css';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateNotes, pushNotes, updateNote } from '../app/redux/notesSlice';
+import './mainNoteStyle/Note.css';
 
-export default function Note({ isSaved, setIsSaved }) {
+export default function Note() {
   const dispatch = useDispatch();
   const { noteId } = useParams();
 
@@ -15,16 +15,16 @@ export default function Note({ isSaved, setIsSaved }) {
   const selectedUser = useSelector((state) => state.usersController.selectedUser);
   const selectedNote = notesStorageData.find((note) => note.id === noteId);
 
-  // Check if there is id to upload or new note
+  const [isSaved,setIsSaved] = useState(false)
+
   useEffect(() => {
     if (selectedNote) {
-      // If a note is selected, load its data into the form
+
       dispatch(updateNotes({ field: "id", value: selectedNote.id }));
       dispatch(updateNotes({ field: "title", value: selectedNote.title }));
       dispatch(updateNotes({ field: "priority", value: selectedNote.priority }));
       dispatch(updateNotes({ field: "content", value: selectedNote.content }));
     } else {
-      // If it's a new note, clear the form
       dispatch(updateNotes({ field: "id", value: null }));
       dispatch(updateNotes({ field: "title", value: "" }));
       dispatch(updateNotes({ field: "priority", value: "" }));
@@ -34,8 +34,6 @@ export default function Note({ isSaved, setIsSaved }) {
 
   const onChange = (field) => (e) => dispatch(updateNotes({ field, value: e.target.value }));
 
-  console.log(noteData.title.length);
-  console.log(!noteId);
 
   const onBlurSave = () => {
 
@@ -52,14 +50,12 @@ export default function Note({ isSaved, setIsSaved }) {
     }   
   };
   
-
-  //check this
   useEffect(() => {
-    const timer = setTimeout(() => {
+     setTimeout(() => {
       setIsSaved(false);
     }, 2000);
-    return () => clearTimeout(timer); 
-  }, [isSaved, setIsSaved]);
+     
+  }, [isSaved]);
 
   return (
     <div className="noteForm">
