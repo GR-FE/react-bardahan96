@@ -1,14 +1,23 @@
 import {  useLocation, useNavigate , useParams} from "react-router"
 import {  useSelector } from "react-redux"
 import '../MOBILE/mobile.css'
+import { use, useEffect } from "react"
 
 export default function TopBar() {
 
     const getUrl = useParams()
     const location = useLocation()
     const navigate = useNavigate()
+    useEffect(() => {
+        console.log("params ",getUrl);
+    })
 
     const notesStorageData = useSelector((state) => state.notesStorage.notesStorageData);
+    const selectedUser = useSelector((state) => state.usersController.selectedUser);
+
+    useEffect(()=> {
+        console.log(selectedUser);
+    })
     
     const handleGoBack = () => {
         navigate(location.pathname.substring(0, location.pathname.lastIndexOf('/')))
@@ -25,8 +34,10 @@ export default function TopBar() {
         <>
         <div>
             <div className="noteHeader">
-                {noteTitle ? <h1>{noteTitle.title}</h1> : <h1>My notes app</h1>}
-                {prevArrow}
+                {!getUrl.selectedUser && <h1>My notes app</h1>}
+                {(!getUrl.noteId && getUrl.selectedUser) && <h1>{selectedUser}</h1>}
+                {(getUrl.noteId && getUrl.selectedUser) && <h1>{noteTitle.title}</h1>}
+                {getUrl.selectedUser && prevArrow}
                 <div>
                 
                 </div>
