@@ -16,6 +16,7 @@ export default function Note() {
   const selectedNote = notesStorageData.find((note) => note.id === noteId);
 
   const [isSaved,setIsSaved] = useState(false)
+  const [maxLength, setMaxLength] = useState(0)
 
   useEffect(() => {
     if (selectedNote) {
@@ -57,6 +58,11 @@ export default function Note() {
      
   }, [isSaved]);
 
+  useEffect(() => {
+    console.log(maxLength);
+  })
+
+
   return (
     <div className="noteForm">
       <div className="formContainer">
@@ -64,7 +70,7 @@ export default function Note() {
         <div className="inputBox">
           <label htmlFor="title">Title</label>
           <input
-            className="inputTitle"
+            className={`${noteData.title.length < 20 ? "inputTitle" : "inputError" }`}
             id="title"
             type="text"
             name="title"
@@ -72,6 +78,7 @@ export default function Note() {
             onChange={onChange('title')}
             onBlur={onBlurSave}
             placeholder="Your title here"
+            maxLength={20}
           />
         </div>
 
